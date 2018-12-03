@@ -298,7 +298,7 @@ public class FlyingShip : MonoBehaviour {
     }
 
     public void FixError(Error error) {
-        if (data.materials > error.cost) {
+        if (data.materials >= error.cost) {
             data.materials -= error.cost;
             data.waste += error.cost;
 
@@ -311,16 +311,16 @@ public class FlyingShip : MonoBehaviour {
         Choice choice = (id == 0) ? choice1 : choice2;
 
         if (choice.id == "Supplies") {
-            data.supplies -= choice.amount;
+            data.supplies = Mathf.Clamp(data.supplies - choice.amount, 0, 5000);
         }
         else if (choice.id == "Food") {
-            data.food -= choice.amount;
+            data.food = Mathf.Clamp(data.food - choice.amount, 0, 5000);
         }
         else if (choice.id == "Materials") {
-            data.materials -= choice.amount;
+            data.materials = Mathf.Clamp(data.materials - choice.amount, 0, 5000);
         }
         else if (choice.id == "Waste") {
-            data.waste -= choice.amount;
+            data.waste = Mathf.Clamp(data.waste - choice.amount, 0, 5000);
         }
         else if (choice.worker != null) {
 
